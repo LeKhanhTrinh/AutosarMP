@@ -8,7 +8,8 @@ import jxl.Workbook;
 public class AllComponents {
 
 	private String name;
-	private ListObject listTasksISR = new ListObject();
+	private ListObject listOSObject = new ListObject();
+	private ListTaskOrISR listTasksISR = new ListTaskOrISR();
 	private ListApplication listApps = new ListApplication();
 	private ListMemory listMemoryParts = new ListMemory();
 	private ListTransition listTransitions = new ListTransition();
@@ -49,19 +50,22 @@ public class AllComponents {
         	if (type.compareTo("app") == 0)
         		listApps.addApp(new OS_Application(name, parent));
         	else
-        		listTasksISR.addObj(new OS_Object(name, parent));
+        		listTasksISR.addObjTS(new OS_TasksISR(name, parent));
+        	
         }
 		
 		//Enter Object
 		int nObject = Integer.valueOf(sheet.getCell(0, nSubject+2).getContents().trim()).intValue();
 		for (int i=0 ; i<nObject ; i++){
 			String name = sheet.getCell(0, i+2+nSubject+2).getContents().trim();
-        	String parent = sheet.getCell(2, i+2+nSubject+2).getContents().trim();
+        	String parent = sheet.getCell(3, i+2+nSubject+2).getContents().trim();
         	//Print all object
         	//System.out.println(name + "\t" + parent);
         	listMemoryParts.addMemory(new MemoryParts(name,parent));
+        	
+        	
 		}
-		
+
 		//Enter Transition
 		int nTransition = Integer.valueOf(sheet.getCell(0, nSubject+2 + nObject+2).getContents().trim()).intValue();
 		System.out.println(nTransition);
@@ -73,17 +77,6 @@ public class AllComponents {
         		String s2name = sheet.getCell(j+1,1+nSubject+2+nObject+2).getContents().trim();	//Dich lai 1 cot
         		//Print cell
 	        	//System.out.println(s1name + "\t" + s2name + ":" + cellEvent);
-	        	
-//        		Object from;
-//				if (listApps.getAppByName(s1name) != null) {
-//					from = listApps.getAppByName(s1name);
-//				}else{
-//					from = listTasksISR.getObjByName(s1name);
-//				}
-//				
-//				Object to = listMemoryParts.getMemoryByName(s2name);
-				
-        		
         		if (cellEvent.compareTo("") == 0){
     				continue;
         		}else {
@@ -103,26 +96,36 @@ public class AllComponents {
 	        	    		action = result[c].substring(result[c].indexOf(":") + 1, result[c].indexOf("]"));
 	        	    		permission = result[c].substring(result[c].indexOf("]") + 1);
 	        			}
-	        			//test
-	        			//System.out.println(getFromTo(s1name).toString() + "\t" + getFromTo(s2name) + "\t" + action + " - " + reqNo + " - " + permission);
-	        			//System.out.println(from.toString() + to.toString() + action + reqNo + permission);
 	        			listTransitions.addTrans(new Transition(getFromTo(s1name), getFromTo(s2name), action, reqNo, permission));
 	        		}
 				}
 			}
 		}
 		
+//		for (OS_Application app : listApps.getListApp()){
+//			listOSObject.addObject(app);
+//		}
+//		for (OS_TasksISR obj : listTasksISR.getListObj()){
+//			listOSObject.addObject(obj);
+//		}
+//		for (MemoryParts mem : listMemoryParts.getListMems()){
+//			listOSObject.addObject(mem);
+//		}
+//		
+//		listOSObject.printAllObjects();
 		//listTransitions.printAllTrans();
 		listTransitions.printAllRequirement();
 	}
 	
 	public Object getFromTo(String fromName){
 		Object from;
-		//System.out.println(fromName);
+		System.out.println(fromName);
+		//listMemoryParts.printAllMemoryParts();
+		
 		if (listApps.getAppByName(fromName) != null) {
 			from = listApps.getAppByName(fromName);
-		}else if (listTasksISR.getObjByName(fromName) != null){
-			from = listTasksISR.getObjByName(fromName);
+		}else if (listTasksISR.getObjTSByName(fromName) != null){
+			from = listTasksISR.getObjTSByName(fromName);
 		}else{
 			from = listMemoryParts.getMemoryByName(fromName);
 		}

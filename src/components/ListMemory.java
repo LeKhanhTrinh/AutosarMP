@@ -27,7 +27,20 @@ public class ListMemory {
 		return null;
 	}
 	
+	public void printAllMemoryParts(){
+		for (int i=0 ; i<listMems.size() ; i++){
+			System.out.println(listMems.get(i));
+		}
+	}
 	
+	public ArrayList<MemoryParts> getListMems() {
+		return listMems;
+	}
+
+	public void setListMems(ArrayList<MemoryParts> listMems) {
+		this.listMems = listMems;
+	}
+
 	public int getSize(){
 		return listMems.size();
 	}

@@ -27,7 +27,14 @@ public class ListApplication {
 		return null;
 	}
 	
-	
+	public ArrayList<OS_Application> getListApp() {
+		return listApp;
+	}
+
+	public void setListApp(ArrayList<OS_Application> listApp) {
+		this.listApp = listApp;
+	}
+
 	public int getSize(){
 		return listApp.size();
 	}

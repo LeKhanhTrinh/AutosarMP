@@ -3,25 +3,26 @@ package components;
 import java.util.ArrayList;
 
 public class ListObject {
-	private ArrayList<OS_Object> listObj;
+
+	private ArrayList<OS_Object> listObject;
 	
 	public ListObject() {
 		// TODO Auto-generated constructor stub
-		listObj = new ArrayList<OS_Object>();
+		listObject = new ArrayList<OS_Object>();
 	}
 	
-	public void addObj(OS_Object e){
-		listObj.add(e);
+	public void addObject(OS_Object e){
+		listObject.add(e);
 	}
 	
-	public OS_Object getObjByIndex(int index){
-		return listObj.get(index);
+	public OS_Object getObjectByIndex(int index){
+		return listObject.get(index);
 	}
 	
-	public OS_Object getObjByName(String _name){
-		for (int i=0 ; i<listObj.size() ; i++){
-			if (listObj.get(i).getName().compareTo(_name) == 0){
-				return listObj.get(i);
+	public Object getObjectByName(String _name){
+		for (int i=0 ; i<listObject.size() ; i++){
+			if (((OS_Object) listObject.get(i)).getName().compareTo(_name) == 0){
+				return listObject.get(i);
 			}
 		}
 		return null;
@@ -29,6 +30,12 @@ public class ListObject {
 	
 	
 	public int getSize(){
-		return listObj.size();
+		return listObject.size();
+	}
+	
+	public void printAllObjects(){
+		for (OS_Object os_obj : listObject){
+			System.out.println(os_obj);
+		}
 	}
 }
