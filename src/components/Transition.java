@@ -3,8 +3,8 @@ package components;
 public class Transition {
 
 	//private String name;
-	private Object from;
-	private Object to;
+	private OS_Object from;
+	private OS_Object to;
 	private String action;
 	private String permission;
 	private String reqNo;
@@ -13,7 +13,7 @@ public class Transition {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Transition(Object _from, Object _to, String _action, String _reqNo, String _permis) {
+	public Transition(OS_Object _from, OS_Object _to, String _action, String _reqNo, String _permis) {
 		from = _from;
 		to = _to;
 		action = _action;
@@ -29,7 +29,10 @@ public class Transition {
 
 	
 	public String toString(){
-		return from.toString() + "-->" + to.toString() + " ( " + reqNo + " :" + action + " / " + permission + ")";
+		//return from.toString() + "-->" + to.toString() + " ( " + reqNo + " :" + action + " / " + permission + ")";
+		System.out.println(to.toString());
+		String test = from.toString() + " --[" + getAction() + "]--> " + to.toString() + " = " + getPermission() + " (" + getReqNo() + ")";
+		return from.toString() + " --[" + getAction() + "]--> " + to.toString() + " = " + getPermission() + " (" + getReqNo() + ")";
 	}
 	
 	/**
@@ -43,19 +46,19 @@ public class Transition {
 		this.reqNo = reqNo;
 	}
 
-	public Object getFrom() {
+	public OS_Object getFrom() {
 		return from;
 	}
 
-	public void setFrom(Object from) {
+	public void setFrom(OS_Object from) {
 		this.from = from;
 	}
 
-	public Object getTo() {
+	public OS_Object getTo() {
 		return to;
 	}
 
-	public void setTo(Object to) {
+	public void setTo(OS_Object to) {
 		this.to = to;
 	}
 

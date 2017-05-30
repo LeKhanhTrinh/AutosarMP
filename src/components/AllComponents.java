@@ -13,20 +13,21 @@ public class AllComponents {
 	private ListApplication listApps = new ListApplication();
 	private ListMemory listMemoryParts = new ListMemory();
 	private ListTransition listTransitions = new ListTransition();
+	String [][] allTransition;
 	
 	public AllComponents(String fileName) throws Exception {
 		// TODO Auto-generated constructor stub
 		inputData(fileName);
 	}
 
-	public static void main(String[] args){
-		try {
-			AllComponents test = new AllComponents("Accession.xls");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args){
+//		try {
+//			AllComponents test = new AllComponents("Accession.xls");
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 	
 	private void inputData(String fileName) throws Exception{		
 		
@@ -68,7 +69,7 @@ public class AllComponents {
 
 		//Enter Transition
 		int nTransition = Integer.valueOf(sheet.getCell(0, nSubject+2 + nObject+2).getContents().trim()).intValue();
-		System.out.println(nTransition);
+		//System.out.println(nTransition);
 		for (int i=0 ; i<nTransition ; i++){
 			//cellString
 			for (int j=0 ; j<nTransition ; j++){
@@ -96,30 +97,31 @@ public class AllComponents {
 	        	    		action = result[c].substring(result[c].indexOf(":") + 1, result[c].indexOf("]"));
 	        	    		permission = result[c].substring(result[c].indexOf("]") + 1);
 	        			}
+	        			
 	        			listTransitions.addTrans(new Transition(getFromTo(s1name), getFromTo(s2name), action, reqNo, permission));
+	        			
 	        		}
 				}
 			}
 		}
 		
-//		for (OS_Application app : listApps.getListApp()){
-//			listOSObject.addObject(app);
-//		}
-//		for (OS_TasksISR obj : listTasksISR.getListObj()){
-//			listOSObject.addObject(obj);
-//		}
-//		for (MemoryParts mem : listMemoryParts.getListMems()){
-//			listOSObject.addObject(mem);
-//		}
-//		
-//		listOSObject.printAllObjects();
+		System.out.println("N TRANS = " + nTransition);
 		//listTransitions.printAllTrans();
-		listTransitions.printAllRequirement();
+		//listTransitions.printAllRequirement();
+		
+		for (int i=0 ; i<nTransition ; i++){
+			listOSObject.addObject(new OS_Object(listTransitions.getTransByIndex(i).getTo().getName()));
+			System.out.println(listTransitions.getTransByIndex(i).getTo());
+		}
+//		for (int i=0 ; i<listTransitions.getSize() ; i++){
+//			System.out.println(listOSObject.getObjectByIndex(i).getName());
+//		}
+		
 	}
 	
-	public Object getFromTo(String fromName){
-		Object from;
-		System.out.println(fromName);
+	public OS_Object getFromTo(String fromName){
+		OS_Object from;
+		//System.out.println(fromName);
 		//listMemoryParts.printAllMemoryParts();
 		
 		if (listApps.getAppByName(fromName) != null) {
@@ -129,28 +131,60 @@ public class AllComponents {
 		}else{
 			from = listMemoryParts.getMemoryByName(fromName);
 		}
-		
+		if (from == null){
+			System.out.println("Cannot found name: " + fromName);
+		}
 		return from;
-	}
+	}	
 	
-//	public void getCellInformation(String cell){
-//		String action = "";
-//		String permission = "";
-//		String reqNo = "";
-//		String[] result = cell.split(";");
-//	    for (int c=0; c<result.length; c++){
-//	    	 
-//	    	if (result[c].indexOf("[") != -1){
-//	    		reqNo = result[c].substring(result[c].indexOf("[") + 1, result[c].indexOf(":"));
-//	    		action = result[c].substring(result[c].indexOf(":") + 1, result[c].indexOf("]"));
-//	    		permission = result[c].substring(result[c].indexOf("]") + 1);
-//	    		
-//	    		// setAction(action); setPermission(permission); setReqNo(reqNo);
-//	    		System.out.println(reqNo + "\t" + action + "\t" + permission);
-//	    	}else{
-//	    		action = result[c]);
-//	    		System.out.println(getAction());
-//	    	}
-//	    }
-//	}
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public ListObject getListOSObject() {
+		return listOSObject;
+	}
+
+	public void setListOSObject(ListObject listOSObject) {
+		this.listOSObject = listOSObject;
+	}
+
+	public ListTaskOrISR getListTasksISR() {
+		return listTasksISR;
+	}
+
+	public void setListTasksISR(ListTaskOrISR listTasksISR) {
+		this.listTasksISR = listTasksISR;
+	}
+
+	public ListApplication getListApps() {
+		return listApps;
+	}
+
+	public void setListApps(ListApplication listApps) {
+		this.listApps = listApps;
+	}
+
+	public ListMemory getListMemoryParts() {
+		return listMemoryParts;
+	}
+
+	public void setListMemoryParts(ListMemory listMemoryParts) {
+		this.listMemoryParts = listMemoryParts;
+	}
+
+	public ListTransition getListTransitions() {
+		return listTransitions;
+	}
+
+	public void setListTransitions(ListTransition listTransitions) {
+		this.listTransitions = listTransitions;
+	}
+
+
+	
 }

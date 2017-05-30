@@ -19,10 +19,14 @@ public class ListApplication {
 	}
 	
 	public OS_Application getAppByName(String _name){
-		for (int i=0 ; i<listApp.size() ; i++){
-			if (listApp.get(i).getName().compareTo(_name) == 0){
-				return listApp.get(i);
+		try{
+			for (int i=0 ; i<listApp.size() ; i++){
+				if (listApp.get(i).getName().compareTo(_name) == 0){
+					return listApp.get(i);
+				}
 			}
+		}catch(Exception ex){
+			System.out.println("No App have this name: " + _name);
 		}
 		return null;
 	}

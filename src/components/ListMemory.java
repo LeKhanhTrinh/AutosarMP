@@ -19,11 +19,16 @@ public class ListMemory {
 	}
 	
 	public MemoryParts getMemoryByName(String _name){
-		for (int i=0 ; i<listMems.size() ; i++){
-			if (listMems.get(i).getName().compareTo(_name) == 0){
-				return listMems.get(i);
+		try{
+			for (int i=0 ; i<listMems.size() ; i++){
+				if (listMems.get(i).getName().compareTo(_name) == 0){
+					return listMems.get(i);
+				}
 			}
+		}catch(Exception ex){
+			System.out.println("No mem has this name: " + _name);
 		}
+		
 		return null;
 	}
 	

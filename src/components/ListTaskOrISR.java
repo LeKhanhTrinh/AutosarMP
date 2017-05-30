@@ -19,11 +19,16 @@ public class ListTaskOrISR {
 	}
 	
 	public OS_TasksISR getObjTSByName(String _name){
-		for (int i=0 ; i<listObj.size() ; i++){
-			if (listObj.get(i).getName().compareTo(_name) == 0){
-				return listObj.get(i);
+		try{
+			for (int i=0 ; i<listObj.size() ; i++){
+				if (listObj.get(i).getName().compareTo(_name) == 0){
+					return listObj.get(i);
+				}
 			}
+		}catch(Exception ex){
+			System.out.println("No Task has this name: " + _name);
 		}
+		
 		return null;
 	}
 	

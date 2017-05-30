@@ -19,9 +19,9 @@ public class ListObject {
 		return listObject.get(index);
 	}
 	
-	public Object getObjectByName(String _name){
+	public OS_Object getObjectByName(String _name){
 		for (int i=0 ; i<listObject.size() ; i++){
-			if (((OS_Object) listObject.get(i)).getName().compareTo(_name) == 0){
+			if (getObjectByIndex(i).getName().compareTo(_name) == 0){
 				return listObject.get(i);
 			}
 		}
