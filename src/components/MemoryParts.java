@@ -1,15 +1,15 @@
 package components;
 
-public class Object {
+public class MemoryParts {
 
 	private String name;
 	private String parent;
 	
-	public Object() {
+	public MemoryParts() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Object(String _name, String _parent){
+	public MemoryParts(String _name, String _parent){
 		name = _name;
 		parent = _parent;
 	}
@@ -17,7 +17,7 @@ public class Object {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return name;
+		return parent + "." + name;
 	}
 	public String getName() {
 		return name;

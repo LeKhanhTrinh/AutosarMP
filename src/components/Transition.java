@@ -3,8 +3,8 @@ package components;
 public class Transition {
 
 	//private String name;
-	private Object from;
-	private Object to;
+	private MemoryParts from;
+	private MemoryParts to;
 	private String action;
 	private String permission;
 	private String reqNo;
@@ -13,7 +13,7 @@ public class Transition {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Transition(Object _from, Object _to, String _action, String _reqNo, String _permis) {
+	public Transition(MemoryParts _from, MemoryParts _to, String _action, String _reqNo, String _permis) {
 		from = _from;
 		to = _to;
 		action = _action;
@@ -40,19 +40,19 @@ public class Transition {
 		this.reqNo = reqNo;
 	}
 
-	public Object getFrom() {
+	public MemoryParts getFrom() {
 		return from;
 	}
 
-	public void setFrom(Object from) {
+	public void setFrom(MemoryParts from) {
 		this.from = from;
 	}
 
-	public Object getTo() {
+	public MemoryParts getTo() {
 		return to;
 	}
 
-	public void setTo(Object to) {
+	public void setTo(MemoryParts to) {
 		this.to = to;
 	}
 

@@ -3,22 +3,22 @@ package components;
 import java.util.ArrayList;
 
 public class ListMemory {
-	private ArrayList<Object> listMems;
+	private ArrayList<MemoryParts> listMems;
 	
 	public ListMemory() {
 		// TODO Auto-generated constructor stub
-		listMems = new ArrayList<Object>();
+		listMems = new ArrayList<MemoryParts>();
 	}
 	
-	public void addMemory(Object e){
+	public void addMemory(MemoryParts e){
 		listMems.add(e);
 	}
 	
-	public Object getMemoryByIndex(int index){
+	public MemoryParts getMemoryByIndex(int index){
 		return listMems.get(index);
 	}
 	
-	public Object getMemoryByName(String _name){
+	public MemoryParts getMemoryByName(String _name){
 		for (int i=0 ; i<listMems.size() ; i++){
 			if (listMems.get(i).getName().compareTo(_name) == 0){
 				return listMems.get(i);

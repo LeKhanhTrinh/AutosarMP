@@ -43,12 +43,13 @@ public class AllComponents {
         	
         	String name = sheet.getCell(0, i+2).getContents().trim();
         	String type = sheet.getCell(2, i+2).getContents().trim();
+        	String parent = sheet.getCell(3, i+2).getContents().trim();
         	//Print all subjects
         	//System.out.println(name + "\t" + type);
         	if (type.compareTo("app") == 0)
-        		listApps.addApp(new OS_Application(name));
+        		listApps.addApp(new OS_Application(name, parent));
         	else
-        		listTasksISR.addObj(new OS_Object(name));
+        		listTasksISR.addObj(new OS_Object(name, parent));
         }
 		
 		//Enter Object
@@ -58,7 +59,7 @@ public class AllComponents {
         	String parent = sheet.getCell(2, i+2+nSubject+2).getContents().trim();
         	//Print all object
         	//System.out.println(name + "\t" + parent);
-        	listMemoryParts.addMemory(new Object(name,parent));
+        	listMemoryParts.addMemory(new MemoryParts(name,parent));
 		}
 		
 		//Enter Transition
@@ -111,11 +112,12 @@ public class AllComponents {
 			}
 		}
 		
-		listTransitions.printAllTrans();
+		//listTransitions.printAllTrans();
+		listTransitions.printAllRequirement();
 	}
 	
-	public Object getFromTo(String fromName){
-		Object from;
+	public MemoryParts getFromTo(String fromName){
+		MemoryParts from;
 		//System.out.println(fromName);
 		if (listApps.getAppByName(fromName) != null) {
 			from = listApps.getAppByName(fromName);

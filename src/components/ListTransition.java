@@ -5,10 +5,12 @@ import java.util.StringTokenizer;
 
 public class ListTransition {
 	private ArrayList<Transition> listTrans;
+	private ArrayList<Transition> listRequirementTrans;
 	
 	public ListTransition() {
 		// TODO Auto-generated constructor stub
 		listTrans = new ArrayList<Transition>();
+		//listRequirementTrans = new ArrayList<Transition>();
 	}
 	
 	public static void main(String[] args){
@@ -17,7 +19,28 @@ public class ListTransition {
 	}
 	
 	
-	
+	public ArrayList<Transition> getListTrans() {
+		return listTrans;
+	}
+
+	public void setListTrans(ArrayList<Transition> listTrans) {
+		this.listTrans = listTrans;
+	}
+
+	public ArrayList<Transition> getListRequirementTrans() {
+		ArrayList<Transition> tempList = new ArrayList<Transition>();
+		for (int i=0 ; i<listTrans.size() ; i++){
+			if (listTrans.get(i).getPermission().compareTo("") != 0){
+				tempList.add(listTrans.get(i));
+			}
+		}
+		return tempList;
+	}
+
+	public void setListRequirementTrans(ArrayList<Transition> listRequirementTrans) {
+		this.listRequirementTrans = listRequirementTrans;
+	}
+
 	//Transition List
 	public void addTrans(Transition e){
 		listTrans.add(e);
@@ -43,6 +66,13 @@ public class ListTransition {
 	public void printAllTrans(){
 		for (int i=0 ; i<listTrans.size() ; i++){
 			System.out.println(listTrans.get(i).toString());
+		}
+	}
+	
+	public void printAllRequirement(){
+		listRequirementTrans = getListRequirementTrans();
+		for (int i=0 ; i<listRequirementTrans.size() ; i++){
+			System.out.println(listRequirementTrans.get(i).toString());
 		}
 	}
 	

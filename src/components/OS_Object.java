@@ -1,6 +1,6 @@
 package components;
 
-public class OS_Object extends Object{
+public class OS_Object extends MemoryParts{
 	
 	private String name;
 	private String parent;
@@ -9,9 +9,10 @@ public class OS_Object extends Object{
 	private String init;
 	
 	
-	public OS_Object(String _name) {
+	public OS_Object(String _name, String _parent) {
 		// TODO Auto-generated constructor stub
 		name = _name;
+		parent = _parent;
 	}
 	
 	public OS_Object(String _name, String _pr, String _ds, String _st){
@@ -24,7 +25,7 @@ public class OS_Object extends Object{
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return name;
+		return parent + "." + name;
 	}
 	
 	public String getInit() {
