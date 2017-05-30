@@ -2,7 +2,7 @@ package components;
 
 import java.util.ArrayList;
 
-public class OS_Application extends MemoryParts{
+public class OS_Application{
 
 	private String name;
 	private ArrayList<OS_Object> containing;

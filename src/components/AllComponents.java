@@ -116,8 +116,8 @@ public class AllComponents {
 		listTransitions.printAllRequirement();
 	}
 	
-	public MemoryParts getFromTo(String fromName){
-		MemoryParts from;
+	public Object getFromTo(String fromName){
+		Object from;
 		//System.out.println(fromName);
 		if (listApps.getAppByName(fromName) != null) {
 			from = listApps.getAppByName(fromName);

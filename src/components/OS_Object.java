@@ -1,11 +1,11 @@
 package components;
 
-public class OS_Object extends MemoryParts{
+public class OS_Object{
 	
 	private String name;
 	private String parent;
 	private String dataSection;
-	private String Stack;
+	private String stack;
 	private String init;
 	
 	
@@ -19,7 +19,7 @@ public class OS_Object extends MemoryParts{
 		name = _name;
 		parent = _pr;
 		dataSection = _ds;
-		Stack = _st;
+		stack = _st;
 	}
 	
 	@Override
@@ -58,10 +58,10 @@ public class OS_Object extends MemoryParts{
 		this.dataSection = dataSection;
 	}
 	public String getStack() {
-		return Stack;
+		return stack;
 	}
 	public void setStack(String stack) {
-		Stack = stack;
+		stack = stack;
 	}
 	
 	
