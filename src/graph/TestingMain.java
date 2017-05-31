@@ -9,7 +9,7 @@ public class TestingMain {
 		try {
 			AllComponents inputComponents = new AllComponents("Accession.xls");
 			FiniteStateMachine theFSM = new FiniteStateMachine("My FSM", inputComponents.getListOSObject(), inputComponents.getListTransitions(), 
-						(OS_Application)inputComponents.getListOSObject().getObjectByName("System"), inputComponents.getListMemoryParts());
+						inputComponents.getListOSObject().getObjectByName("System"), inputComponents.getListMemoryParts());
 			GeneratingTestPaths test = new GeneratingTestPaths(theFSM);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

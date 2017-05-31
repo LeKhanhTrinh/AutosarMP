@@ -6,22 +6,31 @@ import components.ListMemory;
 import components.ListObject;
 import components.ListTransition;
 import components.OS_Application;
+import components.OS_Object;
 import components.Transition;
 
 public class FiniteStateMachine {
 	private String name;
 	private ListObject stateList;
 	private ListTransition transitionList;
-	private OS_Application beginState;
+	private OS_Object beginState;
 	private ListMemory endStateList;
 	
-	public FiniteStateMachine(String _name, ListObject _stateList, ListTransition _transitionList, OS_Application _beginState, ListMemory _endStateList) {
+	public FiniteStateMachine(String _name, ListObject _stateList, ListTransition _transitionList, OS_Object _beginState, ListMemory _endStateList) {
 		// TODO Auto-generated constructor stub
 		name = _name;
 		stateList = _stateList;
 		transitionList = _transitionList;
 		beginState = _beginState;
 		endStateList = _endStateList;
+		
+		System.out.println("BEGIN STATE: " + beginState);
+		System.out.println("END STATES: ");
+		endStateList.printAllMemoryParts();
+		System.out.println("STATE LISTS: ");
+		stateList.printAllObjects();
+		System.out.println("TRANSITION: ");
+		transitionList.printAllTrans();
 	}
 	
 	//Get transitions from a state
@@ -92,7 +101,7 @@ public class FiniteStateMachine {
 		this.transitionList = transitionList;
 	}
 
-	public OS_Application getBeginState() {
+	public OS_Object getBeginState() {
 		return beginState;
 	}
 

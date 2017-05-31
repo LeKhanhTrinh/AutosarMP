@@ -75,7 +75,7 @@ public class AllComponents {
 			for (int j=0 ; j<nTransition ; j++){
 				String cellEvent = sheet.getCell(j+1,i+2+nSubject+2+nObject+2).getContents().trim();	//Dich lai 1 cot
         		String s1name = sheet.getCell(0,i+2+nSubject+2+nObject+2).getContents().trim();
-        		String s2name = sheet.getCell(j+1,1+nSubject+2+nObject+2).getContents().trim();	//Dich lai 1 cot
+        		String s2name = sheet.getCell(j,1+nSubject+2+nObject+2).getContents().trim();	//Dich lai 1 cot
         		//Print cell
 	        	//System.out.println(s1name + "\t" + s2name + ":" + cellEvent);
         		if (cellEvent.compareTo("") == 0){
@@ -110,13 +110,14 @@ public class AllComponents {
 		//listTransitions.printAllRequirement();
 		
 		for (int i=0 ; i<nTransition ; i++){
+			System.out.println(listTransitions.getTransByIndex(i).getTo().getName());
 			listOSObject.addObject(new OS_Object(listTransitions.getTransByIndex(i).getTo().getName()));
-			System.out.println(listTransitions.getTransByIndex(i).getTo());
+			//System.out.println(listTransitions.getTransByIndex(i).getTo());
 		}
 //		for (int i=0 ; i<listTransitions.getSize() ; i++){
 //			System.out.println(listOSObject.getObjectByIndex(i).getName());
 //		}
-		
+		System.out.println();
 	}
 	
 	public OS_Object getFromTo(String fromName){
