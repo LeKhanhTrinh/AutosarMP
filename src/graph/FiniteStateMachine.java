@@ -24,13 +24,22 @@ public class FiniteStateMachine {
 		beginState = _beginState;
 		endStateList = _endStateList;
 		
-		System.out.println("BEGIN STATE: " + beginState);
+		/*System.out.println("BEGIN STATE: " + beginState);
 		System.out.println("END STATES: ");
 		endStateList.printAllMemoryParts();
 		System.out.println("STATE LISTS: ");
 		stateList.printAllObjects();
 		System.out.println("TRANSITION: ");
-		transitionList.printAllTrans();
+		transitionList.printAllTrans();*/
+	}
+	
+	public ListPath getPath_DFS(){
+		//System.out.println("chua bao search");
+		GeneratingTestPaths searcher = new GeneratingTestPaths(this);
+		//System.out.println("Da khai bao search");
+		ListPath PATH = searcher.automatedGeneratingTestPath();
+		//System.out.println("Path khoi tao: ");
+		return PATH;
 	}
 	
 	//Get transitions from a state
@@ -66,9 +75,6 @@ public class FiniteStateMachine {
 		return transitionList.getSize();
 	}
 	
-	public ListTransition getListTransition(){
-		return transitionList;
-	}
 	
 	public int getNumberOfFinalState(){
 		return endStateList.getSize();

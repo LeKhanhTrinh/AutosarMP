@@ -20,14 +20,6 @@ public class AllComponents {
 		inputData(fileName);
 	}
 
-//	public static void main(String[] args){
-//		try {
-//			AllComponents test = new AllComponents("Accession.xls");
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
 	
 	private void inputData(String fileName) throws Exception{		
 		
@@ -75,7 +67,7 @@ public class AllComponents {
 			for (int j=0 ; j<nTransition ; j++){
 				String cellEvent = sheet.getCell(j+1,i+2+nSubject+2+nObject+2).getContents().trim();	//Dich lai 1 cot
         		String s1name = sheet.getCell(0,i+2+nSubject+2+nObject+2).getContents().trim();
-        		String s2name = sheet.getCell(j,1+nSubject+2+nObject+2).getContents().trim();	//Dich lai 1 cot
+        		String s2name = sheet.getCell(j+1,1+nSubject+2+nObject+2).getContents().trim();	//Dich lai 1 cot
         		//Print cell
 	        	//System.out.println(s1name + "\t" + s2name + ":" + cellEvent);
         		if (cellEvent.compareTo("") == 0){
@@ -105,14 +97,23 @@ public class AllComponents {
 			}
 		}
 		
-		System.out.println("N TRANS = " + nTransition);
+		//System.out.println("N TRANS = " + nTransition);
 		//listTransitions.printAllTrans();
 		//listTransitions.printAllRequirement();
 		
-		for (int i=0 ; i<nTransition ; i++){
-			System.out.println(listTransitions.getTransByIndex(i).getTo().getName());
-			listOSObject.addObject(new OS_Object(listTransitions.getTransByIndex(i).getTo().getName()));
-			//System.out.println(listTransitions.getTransByIndex(i).getTo());
+//		for (int i=0 ; i<nTransition ; i++){
+//			//System.out.println(listTransitions.getTransByIndex(i).getTo().getName());
+//			listOSObject.addObject(new OS_Object(listTransitions.getTransByIndex(i).getTo().getName()));
+//			//System.out.println(listTransitions.getTransByIndex(i).getTo());
+//		}
+		for (OS_Application app : listApps.getListApp()){
+			listOSObject.addObject(app);
+		}
+		for (OS_TasksISR tasks : listTasksISR.getListObj()){
+			listOSObject.addObject(tasks);
+		}
+		for (MemoryParts mem : listMemoryParts.getListMems()){
+			listOSObject.addObject(mem);
 		}
 //		for (int i=0 ; i<listTransitions.getSize() ; i++){
 //			System.out.println(listOSObject.getObjectByIndex(i).getName());

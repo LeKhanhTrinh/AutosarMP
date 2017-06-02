@@ -11,6 +11,7 @@ public class TestingMain {
 			FiniteStateMachine theFSM = new FiniteStateMachine("My FSM", inputComponents.getListOSObject(), inputComponents.getListTransitions(), 
 						inputComponents.getListOSObject().getObjectByName("System"), inputComponents.getListMemoryParts());
 			GeneratingTestPaths test = new GeneratingTestPaths(theFSM);
+			test.automatedGeneratingTestPath();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -2,127 +2,118 @@ package graph;
 
 import java.util.ArrayList;
 
+import components.ListMemory;
+import components.ListObject;
+import components.ListTransition;
+
 public class GeneratingTestPaths {
 
-	boolean [][] isUsed;
-	String [][] nameTransition;
-	ArrayTransList[][] arrTranLists;
+	boolean[] isUsed;
+	//String [][] nameTransition;
+	ArrayTransList arrTranLists;
+	
 	int numberStates;
-	ArrayList<String> listEndState;
-	ArrayList<String> listState;
+	//ArrayList<String> listEndState;
+	//ArrayList<String> listState;
 	ArrayList<String> addMore;
 	ArrayList<String> arrTemp;
+	FiniteStateMachine fsm;
+	ListTransition listTransition;
+	ListObject listState;
+	ListMemory listEndState;
+	ListPath listPath;
 	
-	public GeneratingTestPaths(FiniteStateMachine fsm){
-		arrTemp = new ArrayList<String>();
-		listEndState = new ArrayList<String>();
-		listState = new ArrayList<String>();
-		addMore = new ArrayList<String>();
-		numberStates = fsm.getNumberOfState();
+	
+	public GeneratingTestPaths(FiniteStateMachine _fsm) {
+		// TODO Auto-generated constructor stub
+		fsm = _fsm;
+		listEndState = fsm.getEndStateList();
+		listState = fsm.getStateList();
+		listTransition = fsm.getTransitionList();
+		arrTranLists = new ArrayTransList(listTransition);
+		isUsed = new boolean[arrTranLists.arrayTrans.length];
+		arrTemp = new ArrayList<>();
+		listPath = new ListPath();
+		//listPath
 		
-		//get all Transition
-		int countTrans = 0;
-		for (int i=0 ; i<fsm.getNumberOfState() ; i++){
-			for (int j=0 ; j<fsm.getNumberOfState() ; j++){
-				//nameTransition[i][j] = fsm.getListTransition().getTransByIndex(countTrans).toString();
-				arrTranLists[i][j].Add(fsm.getListTransition().getTransByIndex(countTrans).toString());
-				
-			}
-		}
+		for (int i=0 ; i<isUsed.length ; i++) isUsed[i] = false;
 		
-		//get final states
-		for (int i=0 ; i<fsm.getNumberOfFinalState() ; i++){
-			listEndState.add(fsm.getEndStateList().getMemoryByIndex(i).toString());
-		}
+//		
+//		System.out.println("STATE LIST: " + listState.getSize());
+//		listState.printAllObjects();
+//		
+		System.out.println("ARRAY TRANSITION LIST: " + arrTranLists.getSize());
+		arrTranLists.printAll();
+//		//listTransition.printAllTrans();
 		
-		//get all state
-		System.out.println("Num of State: " + fsm.getNumberOfState());
-		for (int i=0 ; i<fsm.getNumberOfState() ; i++){
-			listState.add(fsm.getListTransition().getTransByIndex(i).getTo().toString());
-		}
+//		System.out.println("END STATE LIST: " + listEndState.getSize());
+//		listEndState.printAllMemoryParts();
 		
-		//Assign all state are unused
-		isUsed = new boolean[numberStates][];
-
-		for (int i=0; i<numberStates; i++){ 
-			
-			isUsed[i] = new boolean[numberStates];
-			for (int j=0 ; j<numberStates ; j++){
-				isUsed[i][j] = false;
-			}
-		}
-		
-		//arrTransition = null
-		arrTranLists = new ArrayTransList[numberStates][];
-		for (int i=0; i<numberStates; i++){ 
-			
-			arrTranLists[i] = new ArrayTransList[numberStates];
-			for (int j=0 ; j<numberStates ; j++){
-				arrTranLists[i][j] = new ArrayTransList();
-			}
-		}
-				
-		//nameTransition = null
-		nameTransition = new String[numberStates][];
-		for (int i=0; i<numberStates; i++){ 
-			
-			nameTransition[i]=new String[numberStates];
-			for (int j=0 ; j<numberStates ; j++){
-				nameTransition[i][j] = "";
-			}
-		}
-				
-		System.out.println("STATE LIST: " + listState.size());
-		for (int i=0 ; i<listState.size() ; i++){
-			System.out.println(listState.get(i));
-		}
-		
-		System.out.println("ARRAY TRANSITION LIST: " + numberStates);
-		for (int i=0; i<numberStates; i++){
-			for (int j=0; j<numberStates; j++){
-				if (arrTranLists[i][j].getSize() > 0){
-					System.out.println(i + "; " + j + ": " + arrTranLists[i][j].printAll());
-				}
-			}
-		}
-		
-		System.out.println("END STATE LIST: " + listEndState.size());
-		for (int i=0 ; i<listEndState.size() ; i++){
-			System.out.println(listEndState.get(i));
-		}
+		System.out.println("DFSS : " + fsm.getBeginState().getName());
+		DFS(fsm.getBeginState().getName(), listPath);
 	}
 	
 	public static void main(String[] args){
 		
 	}
 	
+	//Xoa phan sort va add
+	public ListPath automatedGeneratingTestPath(){
+		//ListPath PATH;
+		//listPath = new ListPath();
+		arrTemp.clear();
+		arrTemp.add(fsm.getBeginState().getName());
+		DFS(fsm.getBeginState().getName(), listPath);
+		//addToPath(PATH);
+		//PATH.sort();
+		listPath.printPath();
+		//printList();
+		return listPath;
+	}	
+	
 	//Search the tree
-	private void DFS(int i, ListPath PATH){
+	private void DFS(String start, ListPath PATH){
 		int t=0;
+		//get all children of start
+		ArrayList<Integer> startBy = getAllTransFromName(start);
 		
-		for (int j=0; j<numberStates; j++){
-			
-			if (arrTranLists[i][j].getSize()>0 && isUsed[i][j] == false){
+		//System.out.println(t + " \t " + startBy);
+		for (int i=0 ; i<startBy.size() ; i++){
+			//System.out.println(arrTranLists.getByIndex(startBy.get(i)).getTo().getName());
+			if (isUsed[startBy.get(i)] == false ){
 				t++;
+				isUsed[startBy.get(i)] = true;
 				
-				//overState[j]=1;
-				arrTranLists[i][j].RemoveHead();
-				if (arrTranLists[i][j].IsEmpty()){
-					isUsed[i][j] = true;
-				}
-				arrTemp.add(listState.get(j));
-		
-				DFS(j, PATH);
+				//System.out.println(startBy.get(i) + "\t" + arrTranLists.getByIndex(startBy.get(i)).getTo().getName());
+				
+				arrTemp.add(arrTranLists.getByIndex(startBy.get(i)).toString());
+				//System.out.println("Size TEMP:" + i + "\t" + arrTemp.size());
+				DFS(arrTranLists.getByIndex(startBy.get(i)).getTo().getName(), PATH);
 				arrTemp.remove(arrTemp.size()-1);
-				
+			}else{
+				continue;
+			}
+			
+		}
+		
+		//System.out.println(arrTemp);
+		if (t==0){
+			//System.out.println(arrTemp);
+			PATH.Add(arrTemp);
+		}
+		
+	}
+	
+	public ArrayList<Integer> getAllTransFromName(String name){
+		ArrayList<Integer> rs = new ArrayList<>();
+		
+		for (int i=0 ; i<arrTranLists.getSize() ; i++){
+			//System.out.println(arrTranLists.getByIndex(i).getFrom().toString());
+			if (arrTranLists.getByIndex(i).getFrom().getName().toString().compareTo(name) == 0){
+				rs.add(i);
 			}
 		}
-
-		if (t==0){
-			System.out.println();
-			PATH.Add(arrTemp);
-
-		}
 		
+		return rs;
 	}
 }

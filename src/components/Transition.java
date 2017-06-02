@@ -30,8 +30,8 @@ public class Transition {
 	
 	public String toString(){
 		//return from.toString() + "-->" + to.toString() + " ( " + reqNo + " :" + action + " / " + permission + ")";
-		System.out.println(to.toString());
-		String test = from.toString() + " --[" + getAction() + "]--> " + to.toString() + " = " + getPermission() + " (" + getReqNo() + ")";
+		//System.out.println(to.toString());
+		//String test = from.toString() + " --[" + getAction() + "]--> " + to.toString() + " = " + getPermission() + " (" + getReqNo() + ")";
 		return from.toString() + " --[" + getAction() + "]--> " + to.toString() + " = " + getPermission() + " (" + getReqNo() + ")";
 	}
 	

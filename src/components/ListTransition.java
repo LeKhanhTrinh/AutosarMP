@@ -27,6 +27,15 @@ public class ListTransition {
 		this.listTrans = listTrans;
 	}
 
+	public int getIndexOfTransition(Transition trans){
+		for (int i=0 ; i<listTrans.size() ; i++){
+			if (listTrans.get(i).toString().compareTo(trans.toString()) == 0)
+				return i;
+		}
+		
+		return -1;
+	}
+	
 	public ArrayList<Transition> getListRequirementTrans() {
 		ArrayList<Transition> tempList = new ArrayList<Transition>();
 		for (int i=0 ; i<listTrans.size() ; i++){
@@ -50,9 +59,20 @@ public class ListTransition {
 		return listTrans.get(index);
 	}
 	
-	public Transition getTransByName(String _name){
+	public ArrayList<Transition> getTransByNameFrom(String _name){
+		
+		ArrayList<Transition> rs = new ArrayList<>();
 		for (int i=0 ; i<listTrans.size() ; i++){
 			if (listTrans.get(i).getFrom().toString().compareTo(_name) == 0){
+				rs.add(listTrans.get(i));
+			}
+		}
+		return rs;
+	}
+	
+	public Transition getTransByNameTo(String _name){
+		for (int i=0 ; i<listTrans.size() ; i++){
+			if (listTrans.get(i).getTo().toString().compareTo(_name) == 0){
 				return listTrans.get(i);
 			}
 		}
@@ -65,7 +85,7 @@ public class ListTransition {
 	
 	public void printAllTrans(){
 		for (int i=0 ; i<listTrans.size() ; i++){
-			System.out.println(listTrans.get(i).toString());
+			System.out.println(listTrans.get(i).toString() + "\n");
 		}
 	}
 	
